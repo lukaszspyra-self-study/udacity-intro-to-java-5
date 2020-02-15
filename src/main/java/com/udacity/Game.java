@@ -155,36 +155,70 @@ public class Game {
         String result = "None";
         //Student code goes here ...
 
+        //More generic solution
+        int gridSize = grid.length;
+        int counter;
         char firstFieldMark;
-        //check if win in columns
-        for (int i = 0; i < 3; i++) {
-            firstFieldMark = grid[i][0];
-            if (firstFieldMark == ('x') || firstFieldMark == ('o')) {
-                if (firstFieldMark == grid[i][1] && firstFieldMark == grid[i][2]) {
+        //check win in columns
+        for (int i = 0; i < gridSize; i++) {
+            counter = 0;
+            for (int j = 0; j < gridSize; j++) {
+                firstFieldMark = grid[i][0];
+                if ((firstFieldMark == ('x') || firstFieldMark == ('o')) && firstFieldMark == grid[i][j]) {
+                    counter++;
+                } else {
+                    break;
+                }
+                if (counter == gridSize) {
                     return Character.toUpperCase(firstFieldMark) + " wins";
                 }
             }
         }
-        //check if win in rows
-        for (int i = 0; i < 3; i++) {
-            firstFieldMark = grid[0][i];
-            if (firstFieldMark == ('x') || firstFieldMark == ('o')) {
-                if (firstFieldMark == grid[1][i] && firstFieldMark == grid[2][i]) {
+        //check win in rows
+        for (int i = 0; i < gridSize; i++) {
+            counter = 0;
+            for (int j = 0; j < gridSize; j++) {
+                firstFieldMark = grid[0][i];
+                if ((firstFieldMark == ('x') || firstFieldMark == ('o')) && firstFieldMark == grid[j][i]) {
+                    counter++;
+                } else {
+                    break;
+                }
+                if (counter == gridSize) {
                     return Character.toUpperCase(firstFieldMark) + " wins";
                 }
             }
         }
-        //check if win in slants
-        char midMark = grid[1][1];
-        if (midMark == ('x') || midMark == ('o')) {
-            if ((midMark == grid[0][0] && midMark == grid[2][2]) || (midMark == grid[0][2] && midMark == grid[2][0])) {
-                return Character.toUpperCase(midMark) + " wins";
+        //check slant1 win
+        char middleFieldMark = grid[(gridSize - 1) / 2][(gridSize - 1) / 2];
+        ;
+        counter = 0;
+        for (int i = 0; i < gridSize; i++) {
+            if ((middleFieldMark == ('x') || middleFieldMark == ('o')) && middleFieldMark == grid[i][i]) {
+                counter++;
+            } else {
+                break;
             }
+        }
+        if (counter == gridSize) {
+            return Character.toUpperCase(middleFieldMark) + " wins";
+        }
+        //check slant2 win
+        counter = 0;
+        for (int i = 0; i < gridSize; i++) {
+            if ((middleFieldMark == ('x') || middleFieldMark == ('o')) && middleFieldMark == grid[i][gridSize - 1 - i]) {
+                counter++;
+            } else {
+                break;
+            }
+        }
+        if (counter == gridSize) {
+            return Character.toUpperCase(middleFieldMark) + " wins";
         }
         //check if tie
         boolean tie = true;
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
+        for (int i = 0; i < gridSize; i++) {
+            for (int j = 0; j < gridSize; j++) {
                 if (grid[i][j] == '-') {
                     tie = false;
                     break;
