@@ -189,7 +189,7 @@ public class Game {
                 }
             }
         }
-        //check slant1 win
+        //check diagonal1 win
         char middleFieldMark = grid[(gridSize - 1) / 2][(gridSize - 1) / 2];
         ;
         counter = 0;
@@ -203,7 +203,7 @@ public class Game {
         if (counter == gridSize) {
             return Character.toUpperCase(middleFieldMark) + " wins";
         }
-        //check slant2 win
+        //check diagonal2 win
         counter = 0;
         for (int i = 0; i < gridSize; i++) {
             if ((middleFieldMark == ('x') || middleFieldMark == ('o')) && middleFieldMark == grid[i][gridSize - 1 - i]) {
